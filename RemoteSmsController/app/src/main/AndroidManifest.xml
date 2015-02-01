@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.vicky.remotesmscontroller" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".InitialActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name=".Fake"
+            android:label="@string/title_activity_fake" >
+        </activity>
+        <activity
+            android:name=".SMSActions"
+            android:label="@string/title_activity_smsactions" >
+        </activity>
+        <activity
+            android:name=".TimeBlock"
+            android:label="@string/title_activity_time_block" >
+        </activity>
+        <activity
+            android:name=".FakeSMS"
+            android:label="@string/title_activity_fake_sms" >
+        </activity>
+        <activity
+            android:name=".ChangePassword"
+            android:label="@string/title_activity_change_password" >
+        </activity>
+    </application>
+
+</manifest>
