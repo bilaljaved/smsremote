@@ -15,6 +15,7 @@ public class SMSReceiver extends BroadcastReceiver{
     final SmsManager sms= SmsManager.getDefault();
     String SMS;
     final String App_Key="SRC";
+    String SenderNum;
 
     public SMSReceiver() {
     }
@@ -37,10 +38,10 @@ public class SMSReceiver extends BroadcastReceiver{
                     currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
                 }
                     String phoneNumber = currentMessage.getDisplayOriginatingAddress();
-                    String senderNum = phoneNumber;
+                    SenderNum = phoneNumber;
                     SMS = currentMessage.getDisplayMessageBody();
 
-                    Log.i("SMSReceiver","SenderNum = "+senderNum+", Message = "+SMS);
+                    Log.i("SMSReceiver","SenderNum = "+SenderNum+", Message = "+SMS);
 
 
                     String message_parts[]=SMS.split(" ");
@@ -49,6 +50,7 @@ public class SMSReceiver extends BroadcastReceiver{
                     {
                         Intent intent_for_service = new Intent(context,ProcessService.class);
                         intent_for_service.putExtra("SMS",SMS);
+                        intent_for_service.putExtra("requester_no",SenderNum);
                         context.startService(intent_for_service);
                     }
 

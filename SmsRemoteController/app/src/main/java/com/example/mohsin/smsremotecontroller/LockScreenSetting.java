@@ -23,7 +23,7 @@ public class LockScreenSetting extends Activity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock_screen_setting);
-        Log.i("Lock", "Method: onCreate, Class:LockScreenSettings");
+        Log.d("Lock", "Method: onCreate, Class:LockScreenSettings");
         mDevicePolicyManager = (DevicePolicyManager)getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
         mComponentName = new ComponentName(this, AdminReceiver.class);
@@ -37,7 +37,7 @@ public class LockScreenSetting extends Activity implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Log.i("Lock", "Method: onClick, Class: LockScreenSetting");
+        Log.d("Lock", "Method: onClick, Class: LockScreenSetting");
         switch (v.getId()) {
             case R.id.btnEnable:
                 Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
@@ -64,7 +64,7 @@ public class LockScreenSetting extends Activity implements OnClickListener {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.i("Lock", "Method: onActivityResult, Class: LockScreenSetting");
+        Log.d("Lock", "Method: onActivityResult, Class: LockScreenSetting");
         if (requestCode == ADMIN_INTENT) {
             if (resultCode == RESULT_OK) {
                 Toast.makeText(getApplicationContext(), "Registered As Admin", Toast.LENGTH_SHORT).show();
