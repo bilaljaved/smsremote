@@ -3,6 +3,7 @@ package com.example.mohsin.smsremotecontroller;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.telephony.SmsManager;
@@ -46,12 +47,14 @@ public class SMSReceiver extends BroadcastReceiver{
 
                     String message_parts[]=SMS.split(" ");
 
-                    if(message_parts[0].equals("SRC"))
+                    if(message_parts[0].equalsIgnoreCase("SRC"))
                     {
                         Intent intent_for_service = new Intent(context,ProcessService.class);
                         intent_for_service.putExtra("SMS",SMS);
                         intent_for_service.putExtra("requester_no",SenderNum);
                         context.startService(intent_for_service);
+                        //abortBroadcast();
+                        this.clearAbortBroadcast();
                     }
 
                    /* //Toast toast = Toast.makeText(context,"SenderNum = "+senderNum+", Message = "+message,Toast.LENGTH_LONG);

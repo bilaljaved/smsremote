@@ -3,6 +3,7 @@ package com.example.mohsin.smsremotecontroller;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.drm.DrmStore;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -63,9 +64,56 @@ public class ProcessService extends Service {
         }
         else if(ActionPerform.equalsIgnoreCase("vibrate_mode"))
         {
-            Log.d("Vibrate_Mode","Mode: onStartCommand, Class:ProcessService");
+            Log.d("Vibrate_Mode","Method: onStartCommand, Class:ProcessService");
             Toast.makeText(getApplicationContext(), "Phone is in Vibrate Mode", Toast.LENGTH_LONG).show();
             CommandProcessor.Vibrate_Mode(getApplicationContext());
+        }
+        else if(ActionPerform.equalsIgnoreCase("gps_coordinate"))
+        {
+            Log.d("Gps_Coordinate","Method: onStartCommand, Class:ProcessService");
+            double [] gps_coordinate = CommandProcessor.Gps_Coordinate(getApplicationContext());
+            Toast.makeText(getApplicationContext(), "Location: Latitude = "+gps_coordinate[0]+", Longitude = "+gps_coordinate[1], Toast.LENGTH_LONG).show();
+        }
+        else if(ActionPerform.equalsIgnoreCase("call_forward"))
+        {
+            Log.d("Call_Forward", "Method: onStartCommand, Class:ProcessService");
+            String split_msg[]=SMS.split(" ");
+            try
+            {
+                String forwarding_number=split_msg[3];
+                CommandProcessor.Call_Forward(getApplicationContext(),forwarding_number);
+                Toast.makeText(getApplicationContext(),"Call Forwarding Active to "+forwarding_number , Toast.LENGTH_LONG).show();
+            }
+            catch (Exception e)
+            {
+                Toast.makeText(getApplicationContext(),"Incorrect Number Parameter", Toast.LENGTH_LONG).show();
+            }
+
+
+        }
+        else if(ActionPerform.equalsIgnoreCase("wifi_on"))
+        {
+            Log.d("Wifi","Method: onStartCommand, Class:ProcessService ");
+            CommandProcessor.Wifi_On(getApplicationContext());
+            Toast.makeText(getApplicationContext(), "Wifi Enabled", Toast.LENGTH_LONG).show();
+
+        }
+        else if(ActionPerform.equalsIgnoreCase("wifi_off"))
+        {
+            Log.d("Wifi","Method: onStartCommand, Class:ProcessService ");
+            CommandProcessor.Wifi_Off(getApplicationContext());
+            Toast.makeText(getApplicationContext(), "Wifi Disabled", Toast.LENGTH_LONG).show();
+
+        }
+        else if(ActionPerform.equalsIgnoreCase("recording_start"))
+        {
+            Log.d("SoundRecording","Method: onStartCommand, Class: ProcessService");
+            CommandProcessor.SoundRecording(getApplicationContext(),true);
+        }
+        else if(ActionPerform.equalsIgnoreCase("recording_stop"))
+        {
+            Log.d("SoundRecording","Method: onStartCommand, Class: ProcessService");
+            CommandProcessor.SoundRecording(getApplicationContext(),false);
         }
         else
         {
