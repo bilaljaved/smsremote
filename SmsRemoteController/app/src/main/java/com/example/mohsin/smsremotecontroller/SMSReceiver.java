@@ -26,6 +26,7 @@ public class SMSReceiver extends BroadcastReceiver{
         // TODO: This method is called when the BroadcastReceiver is receiving
         // an Intent broadcast.
 
+
         final Bundle bundle = intent.getExtras();
 
         try{

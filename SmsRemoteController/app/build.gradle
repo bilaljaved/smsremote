@@ -1,12 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 16
-    buildToolsVersion "21.1.2"
-
+    compileSdkVersion 14
+    buildToolsVersion '19.1.0'
     defaultConfig {
         applicationId "com.example.mohsin.smsremotecontroller"
-        minSdkVersion 16
+        minSdkVersion 14
         targetSdkVersion 16
         versionCode 1
         versionName "1.0"
@@ -16,6 +15,8 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    productFlavors {
     }
 }
 

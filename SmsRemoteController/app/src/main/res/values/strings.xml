@@ -7,5 +7,29 @@
     <string name="title_activity_lock_screen_setting">LockScreenSetting</string>
     <string name="hello_world">Hello world!</string>
     <string name="lock_screen_welcome">Enable Lock Screen Option</string>
+    <string name="title_activity_fake_call">FakeCall</string>
+    <string name="Contact_Name">Sample Contact Name</string>
+    <string name="Contact_Number">Sample Number</string>
+    <string name="title_activity_fake_sms">Fake_sms</string>
+    <string name="Fake_SMS">Sending Fake Sms</string>
+    <string name="title_activity_timed__sms__block">Timed_SMS_Block</string>
+    <string name="Unblock">Unblock</string>
+    <string name="title_activity_timed__call__block">Timed_Call_Block</string>
+    <string name="title_activity_recieve__fake__call">Recieve_Fake_Call</string>
+    <string name="Five">after 5 sec</string>
+    <string name="Three">after 3 sec</string>
+    <string name="Ten"> after 10 sec</string>
+    <string name="Fifteen"> after 15 sec</string>
+    <string name="Block_time">Block sms for next</string>
+    <string name="Start_time">Start time</string>
+    <string name="End_time">End Time</string>
+    <string name="Block_15_min"> 15 sec</string>
+    <string name="Block_30_min"> 30 sec</string>
+    <string name="Block_45_min"> 45 sec</string>
+    <string name="Block_Hour"> 1 min</string>
+    <string name="Block_two_hour"> 2 hour</string>
+    <string name="Time">Recieve after this Time</string>
+    <string name="Block_until">Block till selected time</string>
+
 
 </resources>

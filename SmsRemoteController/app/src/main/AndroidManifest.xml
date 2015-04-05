@@ -4,14 +4,18 @@
 
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -29,19 +33,28 @@
         </activity>
 
         <receiver
-            android:name=".SMSReceiver"
+            android:name=".Time_block_Receiver"
             android:enabled="true"
             android:exported="true" >
-            <intent-filter>
+            <intent-filter android:priority="999" >
+                <action android:name="Block_SMS" />
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
         <receiver
-            android:name="AdminReceiver"
-            android:permission="android.permission.BIND_DEVICE_ADMIN">
+            android:name=".SMSReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter android:priority="999" >
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".AdminReceiver"
+            android:permission="android.permission.BIND_DEVICE_ADMIN" >
             <meta-data
                 android:name="android.app.device_admin"
-                android:resource="@xml/admin"/>
+                android:resource="@xml/admin" />
 
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
@@ -62,6 +75,47 @@
         <activity
             android:name=".LockScreenSetting"
             android:label="@string/title_activity_lock_screen_setting" >
+        </activity>
+        <activity
+            android:name=".FakeCall"
+            android:label="@string/title_activity_fake_call" >
+        </activity>
+        <activity
+            android:name=".Fake_sms"
+            android:label="@string/title_activity_fake_sms" >
+        </activity>
+
+        <receiver
+            android:name=".Fake_Sms_Receiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="Fake_sms_broadcast" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".Timed_SMS_Block"
+            android:label="@string/title_activity_timed__sms__block" >
+        </activity>
+
+        <receiver
+            android:name=".Timed_Call_Block_Receiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+                <action android:name="Block_Call" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".Timed_Call_Block"
+            android:label="@string/title_activity_timed__call__block" >
+        </activity>
+        <activity
+            android:name=".Recieve_Fake_Call"
+            android:label="@string/title_activity_recieve__fake__call" >
         </activity>
     </application>
 

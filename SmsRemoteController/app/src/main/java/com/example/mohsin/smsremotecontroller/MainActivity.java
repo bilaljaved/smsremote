@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
@@ -14,12 +15,19 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
     public void onClick(View view)
     {
-        Intent intent =new Intent(this,LockScreenSetting.class);
+        Intent intent =new Intent(this,FakeCall.class);
+        //FakeCall
+          //      Fake_sms
+            //    Timed_Call_Block
+              //Timed_SMS_Block
+
         startActivity(intent);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

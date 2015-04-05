@@ -1,0 +1,111 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.mohsin.smsremotecontroller.Fake_sms">
+
+    <TextView android:text="@string/Fake_SMS" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@android:string/no"
+        android:id="@+id/button8"
+        android:onClick="Cancel"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/textView9" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:ems="10"
+        android:id="@+id/Fake_SMS_Num"
+        android:layout_below="@+id/textView8"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/Contact_Number"
+        android:id="@+id/textView8"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView3" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/Fake_SMS_MSG"
+        android:layout_below="@+id/textView9"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/title_activity_fake_sms"
+        android:id="@+id/textView9"
+        android:layout_below="@+id/Fake_SMS_Num"
+        android:layout_alignParentLeft="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Three"
+        android:id="@+id/button9"
+        android:onClick="Three"
+        android:layout_below="@+id/Fake_SMS_MSG"
+        android:layout_alignParentLeft="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Five"
+        android:id="@+id/button10"
+        android:onClick="Five"
+        android:layout_above="@+id/button12"
+        android:layout_alignRight="@+id/button12"
+        android:layout_alignLeft="@+id/button12" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Ten"
+        android:id="@+id/button11"
+        android:layout_below="@+id/button9"
+        android:onClick="Ten"
+        android:layout_alignParentLeft="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Fifteen"
+        android:id="@+id/button12"
+        android:onClick="Fifteen"
+        android:layout_alignTop="@+id/button11"
+        android:layout_alignParentRight="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Time"
+        android:id="@+id/button2"
+        android:onClick="TimePicker"
+        android:layout_alignTop="@+id/button8"
+        android:layout_toRightOf="@+id/textView8" />
+
+    <TimePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Fake_Sms_timePicker"
+        android:layout_above="@+id/button8"
+        android:layout_alignParentLeft="true" />
+
+</RelativeLayout>
