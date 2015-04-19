@@ -30,6 +30,6 @@
     <string name="Block_two_hour"> 2 hour</string>
     <string name="Time">Recieve after this Time</string>
     <string name="Block_until">Block till selected time</string>
-
+    <string name="title_activity_change_password">ChangePassword</string>
 
 </resources>
