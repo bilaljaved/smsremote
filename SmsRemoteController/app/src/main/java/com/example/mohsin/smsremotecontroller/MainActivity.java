@@ -19,11 +19,37 @@ public class MainActivity extends Activity {
     }
     public void onClick(View view)
     {
+        Intent intent =new Intent(this,LockScreenSetting.class);
+
+        startActivity(intent);
+    }
+
+    public void FakeCall(View view)
+    {
         Intent intent =new Intent(this,FakeCall.class);
+        startActivity(intent);
+    }
+
+    public void SMSBlock(View view)
+    {
+        Intent intent =new Intent(this,Timed_SMS_Block.class);
+        startActivity(intent);
+    }
+
+    public void CallBlock(View view)
+    {
+        Intent intent =new Intent(this,Timed_Call_Block.class);
+
+        startActivity(intent);
+    }
+
+    public void FakeSMS(View view)
+    {
+        Intent intent =new Intent(this,Fake_sms.class);
         //FakeCall
-          //      Fake_sms
-            //    Timed_Call_Block
-              //Timed_SMS_Block
+        //      Fake_sms
+        //    Timed_Call_Block
+        //Timed_SMS_Block
 
         startActivity(intent);
     }

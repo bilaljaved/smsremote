@@ -13,9 +13,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView"
+        android:id="@+id/MyButton1"
+        android:layout_alignParentLeft="true"
+        android:text="@string/title_activity_lock_screen_setting"
+        android:onClick="onClick"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MyButton1"
+        android:id="@+id/MyButton2"
         android:layout_alignParentLeft="true"
         android:text="@string/title_activity_fake_call"
-        android:onClick="onClick"
+        android:onClick="FakeCall"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MyButton2"
+        android:id="@+id/MyButton3"
+        android:layout_alignParentLeft="true"
+        android:text="@string/title_activity_fake_sms"
+        android:onClick="FakeSMS"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MyButton3"
+        android:id="@+id/MyButton4"
+        android:layout_alignParentLeft="true"
+        android:text="@string/title_activity_timed__sms__block"
+        android:onClick="SMSBlock"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MyButton4"
+        android:id="@+id/MyButton5"
+
+        android:layout_alignParentLeft="true"
+        android:text="@string/title_activity_timed__call__block"
+        android:onClick="CallBlock"
         />
 
 
