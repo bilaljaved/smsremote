@@ -7,6 +7,11 @@
     <string name="title_activity_lock_screen_setting">LockScreenSetting</string>
     <string name="hello_world">Hello world!</string>
     <string name="lock_screen_welcome">Enable Lock Screen Option</string>
+    <string name="lock_screen">Lock Screen Setting</string>
+    <string name="fake_call">Fake Call</string>
+    <string name="fake_sms">Fake SMS</string>
+    <string name="timed_call_block">Timed Call Block</string>
+    <string name="timed_sms_block">Timed SMS Block</string>
     <string name="title_activity_fake_call">FakeCall</string>
     <string name="Contact_Name">Sample Contact Name</string>
     <string name="Contact_Number">Sample Number</string>
