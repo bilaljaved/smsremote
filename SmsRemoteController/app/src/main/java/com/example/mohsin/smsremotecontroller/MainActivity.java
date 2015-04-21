@@ -2,11 +2,17 @@ package com.example.mohsin.smsremotecontroller;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.mohsin.smsremotecontroller.SQLite.Database;
+import com.example.mohsin.smsremotecontroller.SQLite.User_Admin;
+import com.example.mohsin.smsremotecontroller.SharedPreferenceAccess.AppStart;
 
 
 public class MainActivity extends Activity {
@@ -14,7 +20,39 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        AppStart s=new AppStart();
+        if(s.AppRunStatus(this))
+        {
+            setContentView(R.layout.initial_password);
+            Toast.makeText(this,"Hello",Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            setContentView(R.layout.activity_main);
+            Toast.makeText(this,"Hello1",Toast.LENGTH_LONG).show();
+        }
+
+    }
+    public void InitialPasswordSubmit(View view)
+    {
+        EditText password = (EditText)findViewById(R.id.password);
+        EditText confirm_password=(EditText)findViewById(R.id.confirm_password);
+        String pass=password.getText().toString();
+        String c_pass=confirm_password.getText().toString();
+
+        if(pass.equals(c_pass))
+        {
+            Toast.makeText(this,"Passwords are equal",Toast.LENGTH_LONG).show();
+            User_Admin admin_object=new User_Admin("Admin",pass);
+            Database db=new Database(this);
+            db.Save_Password(admin_object);
+            Toast.makeText(this,"Password Saved Successfully!",Toast.LENGTH_LONG).show();
+            setContentView(R.layout.activity_main);
+        }
+        else
+        {
+            Toast.makeText(this,"Password and Confirm Password Fields do not Match!",Toast.LENGTH_LONG).show();
+        }
 
     }
     public void LockScreenSetting(View view)

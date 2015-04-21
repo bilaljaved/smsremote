@@ -13,7 +13,6 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
@@ -117,10 +116,7 @@
             android:name=".Recieve_Fake_Call"
             android:label="@string/title_activity_recieve__fake__call" >
         </activity>
-        <activity
-            android:name=".ChangePassword"
-            android:label="@string/title_activity_change_password" >
-        </activity>
+
     </application>
 
 </manifest>
