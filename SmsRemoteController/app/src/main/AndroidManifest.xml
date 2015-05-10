@@ -116,7 +116,10 @@
             android:name=".Recieve_Fake_Call"
             android:label="@string/title_activity_recieve__fake__call" >
         </activity>
-
+        <activity
+            android:name=".ChangePassword"
+            android:label="@string/title_activity_change_password" >
+        </activity>
     </application>
 
 </manifest>

@@ -135,7 +135,7 @@ public class CommandProcessor {
     }
     static void Gps_On(Context context)
     {
-        Log.d("Location","Method: Gps_Access, Class: CommandProcessor");
+        Log.d("Location", "Method: Gps_Access, Class: CommandProcessor");
 
         LocationManager locationManager=(LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
     }
@@ -177,5 +177,23 @@ public class CommandProcessor {
             myAudioRecorder  = null;
             Toast.makeText(context, "Audio recorded successfully",Toast.LENGTH_LONG).show();
         }
+    }
+    static String Help(Context context)
+    {
+        Log.d("Help", "Method: Help, Class: CommandProcessor");
+        String help="Command List:\n" +
+                "1. vibrate\n" +
+                "2. lock\n" +
+                "3. silent_mode\n" +
+                "4. vibrate_mode\n" +
+                "5. ringer_mode\n" +
+                "6. gps_coordinate\n" +
+                "7. call_forward [number]\n" +
+                "8. wifi_on\n" +
+                "9. wifi_off\n" +
+                "10. recording_start\n" +
+                "11. recording_stop\n" +
+                "12. help";
+        return help;
     }
 }

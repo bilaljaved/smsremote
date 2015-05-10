@@ -79,15 +79,20 @@ public class Database extends SQLiteOpenHelper {
 		Cursor cursor=db.query(TABLE_User_Admin, COLUMNS,"Ph_Number=?",  new String[]{String.valueOf(Ph_Number)}, null, null, null, null);
 
 		//3. if we got result get the first one
-		if(cursor!=null)
-			cursor.moveToFirst();
-
-		//4.build User_Admin object
-		User_Admin user_admin =new User_Admin();
-		user_admin.setPh_Number(cursor.getString(0));
-	    user_admin.setPassword(cursor.getString(1));
-
-		return user_admin;
+		if(cursor!=null) {
+            cursor.moveToFirst();
+        }
+        try {
+            //4.build User_Admin object
+            User_Admin user_admin =new User_Admin();
+            user_admin.setPh_Number(cursor.getString(0));
+            user_admin.setPassword(cursor.getString(1));
+            return user_admin;
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
 	}
     public boolean Verify(String Ph_Number)
     {

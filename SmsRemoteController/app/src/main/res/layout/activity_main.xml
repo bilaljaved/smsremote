@@ -23,7 +23,8 @@
         android:text="@string/fake_call"
         android:onClick="FakeCall"
         android:layout_below="@+id/button21"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:id="@+id/button24" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,6 +50,15 @@
         android:layout_alignParentLeft="true"
         android:id="@+id/button19" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Password"
+        android:id="@+id/button25"
+        android:layout_below="@+id/button24"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:onClick="Change_Password_Settings"/>
 
 
 </RelativeLayout>

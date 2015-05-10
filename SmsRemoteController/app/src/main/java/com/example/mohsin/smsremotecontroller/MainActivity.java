@@ -24,12 +24,12 @@ public class MainActivity extends Activity {
         if(s.AppRunStatus(this))
         {
             setContentView(R.layout.initial_password);
-            Toast.makeText(this,"Hello",Toast.LENGTH_LONG).show();
+            //Toast.makeText(this,"Hello",Toast.LENGTH_LONG).show();
         }
         else
         {
             setContentView(R.layout.activity_main);
-            Toast.makeText(this,"Hello1",Toast.LENGTH_LONG).show();
+            //Toast.makeText(this,"Hello1",Toast.LENGTH_LONG).show();
         }
 
     }
@@ -78,6 +78,11 @@ public class MainActivity extends Activity {
     public void TimedSMSBlock(View view)
     {
         Intent intent =new Intent(this,Timed_SMS_Block.class);
+        startActivity(intent);
+    }
+    public void Change_Password_Settings(View view)
+    {
+        Intent intent=new Intent(this,ChangePassword.class);
         startActivity(intent);
     }
 
