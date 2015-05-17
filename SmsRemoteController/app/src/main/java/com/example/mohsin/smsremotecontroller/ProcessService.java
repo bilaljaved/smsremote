@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.example.mohsin.smsremotecontroller.SQLite.Database;
 import com.example.mohsin.smsremotecontroller.SQLite.User_Admin;
 
+import java.util.ArrayList;
+
 public class ProcessService extends Service {
 
     private String Password=null;
@@ -22,6 +24,7 @@ public class ProcessService extends Service {
     private String Requester_No=null;
     private boolean already_registered=false;
     private boolean authenticated_user=false;
+    private String SearchString=null;
 
     public ProcessService() {
     }
@@ -38,10 +41,35 @@ public class ProcessService extends Service {
             {
                 this.Password=SplitMessage[1];
                 this.ActionPerform=SplitMessage[2];
+
+                //Check Whether actionperform has arguments or not?
+                String []arguments_check_arr = ActionPerform.split(":");
+                if(arguments_check_arr.length==2)
+                {
+                    ActionPerform=arguments_check_arr[0];
+                    SearchString=arguments_check_arr[1];
+                }
+                else if(arguments_check_arr.length==1)
+                {
+                    ActionPerform=arguments_check_arr[0];
+                }
+
             }
             else if(SplitMessage.length>1)
             {
                 this.ActionPerform=SplitMessage[1];
+
+                //Check Whether actionperform has arguments or not?
+                String []arguments_check_arr = ActionPerform.split(":");
+                if(arguments_check_arr.length==2)
+                {
+                    ActionPerform=arguments_check_arr[0];
+                    SearchString=arguments_check_arr[1];
+                }
+                else if(arguments_check_arr.length==1)
+                {
+                    ActionPerform=arguments_check_arr[0];
+                }
             }
         }
         Database db=new Database(getApplicationContext());
@@ -148,23 +176,30 @@ public class ProcessService extends Service {
             else if(ActionPerform.equalsIgnoreCase("help"))
             {
                 Log.d("Help", "Method: onStartCommand, Class: ProcessService");
-
-                String help="Command List: " +
-                        "vibrate," +
-                        "lock," +
-                        "silent_mode," +
-                        "vibrate_mode," +
-                        "ringer_mode," +
-                        "gps_coordinate," +
-                        "call_forward [number]," +
-                        "wifi_on," +
-                        "wifi_off," +
-                        "recording_start," +
-                        "recording_stop," +
-                        "help,";
-
+                String help=CommandProcessor.Help(getApplicationContext());
                 SendSms(help, Requester_No);
-                Log.d("Help", "Method: onStartCommand, Class: ProcessService, Help Done!");
+            }
+            else if(ActionPerform.equalsIgnoreCase("contacts"))
+            {
+                Log.d("Contacts","Method: onStartCommand,Class:ProcessService");
+                if(SearchString!=null)
+                {
+                    Log.d("Contacts","Method: onStartCommand,Class:ProcessService, SearchString: "+SearchString);
+                    String contacts_details=CommandProcessor.fetchContacts(getApplicationContext(),SearchString);
+                    //Toast.makeText(getApplicationContext(),contacts_details,Toast.LENGTH_LONG).show();
+                    if(contacts_details.length()<10)
+                    {
+                        SendSms("No Such Name Found!",Requester_No);
+                    }
+                    else {
+                        SendSms(contacts_details, Requester_No);
+                    }
+                }
+                else
+                {
+                    SendSms("Please Enter Some Search Criteria!", Requester_No);
+                }
+
             }
             else
             {
@@ -191,9 +226,15 @@ public class ProcessService extends Service {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
-    private void SendSms(String message,String phone_no)
+    public void SendSms(String message,String phone_no)
     {
-        SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(phone_no,null,message,null,null);
+        Log.d("TestSMS","Method: sendSms, Class:ProcessService");
+        SmsManager smsManager = SmsManager. getDefault();
+        ArrayList<String> parts = smsManager.divideMessage(message);
+        for (int i=0;i<parts.size();i++)
+        {
+            Log.d("TestSMS","Part no: "+(i+1)+" is: "+parts.get(i));
+        }
+        smsManager.sendMultipartTextMessage(phone_no,null,parts,null,null);
     }
 }

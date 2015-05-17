@@ -50,13 +50,10 @@ public class SMSReceiver extends BroadcastReceiver{
 
                     if(message_parts[0].equalsIgnoreCase("SRC"))
                     {
-                        Log.d("Test","SMS Receiver!");
                         Intent intent_for_service = new Intent(context,ProcessService.class);
                         intent_for_service.putExtra("SMS",SMS);
                         intent_for_service.putExtra("requester_no",SenderNum);
-                        Log.d("Test", "SMS Receiver! 1");
                         context.startService(intent_for_service);
-                        Log.d("Test", "SMS Receiver! 2");
                         //abortBroadcast();
                         //this.clearAbortBroadcast();
                     }
