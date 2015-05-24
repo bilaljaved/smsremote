@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 14
+    compileSdkVersion 16
     buildToolsVersion '19.1.0'
     defaultConfig {
         applicationId "com.example.mohsin.smsremotecontroller"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 16
         versionCode 1
         versionName "1.0"

